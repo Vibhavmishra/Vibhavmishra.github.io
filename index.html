@@ -278,7 +278,7 @@
     <footer style="text-align: center;background: aliceblue;height: 5%;">
         <p style="padding-top: 5px;">© Copyright 2020</p>
     </footer>
-    <script>
+<!--     <script>
         var i = 0;
         var txt = 'Hi, I\'m Vibhav Mishra';
         var speed = 200;
@@ -290,7 +290,61 @@
             }
         }
         typeWriter();
-    </script>
+    </script> -->
+    <script>
+    const phrases = [
+        "Turning complex ideas into powerful digital products...",
+        "Empowering businesses with scalable full-stack solutions...",
+        "Crafting clean, performant code — one feature at a time...",
+        "Hi, I'm Vibhav Mishra — building smart apps for a smarter world!"
+    ];
+
+    let i = 0, j = 0;
+    let currentPhrase = [];
+    let isDeleting = false;
+    let isEnd = false;
+
+    function loop() {
+        document.getElementById('myname').innerHTML = currentPhrase.join('');
+
+        if (i < phrases.length) {
+
+            if (!isDeleting && j <= phrases[i].length) {
+                currentPhrase.push(phrases[i][j]);
+                j++;
+                document.getElementById('myname').innerHTML = currentPhrase.join('');
+            }
+
+            if (isDeleting && j <= phrases[i].length) {
+                currentPhrase.pop();
+                j--;
+                document.getElementById('myname').innerHTML = currentPhrase.join('');
+            }
+
+            if (j === phrases[i].length) {
+                isEnd = true;
+                isDeleting = true;
+            }
+
+            if (isDeleting && j === 0) {
+                currentPhrase = [];
+                isDeleting = false;
+                i++;
+                if (i === phrases.length) {
+                    i = 0;
+                }
+            }
+        }
+        const speedUp = Math.random() * (80 - 50) + 50;
+        const normalSpeed = Math.random() * (300 - 200) + 200;
+        const time = isEnd ? 1500 : isDeleting ? speedUp : normalSpeed;
+        isEnd = false;
+        setTimeout(loop, time);
+    }
+
+    loop();
+</script>
+
 </body>
 
 </html>
